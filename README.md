@@ -4,7 +4,7 @@
 
 For the business owners that need to keep track of their employee, this is a great way to do so! Through a series of prompts, you are able to view all of your employees, roles, and departments; add new employees, departments, and roles; update employee roles, and delete employees!
 
-This was a difficult homework to do. Adding employees and having them actually show up on the database and in the tables took so long, and in the end, it helped me to understand what I was doing, but it took so much time, that I wasn't able to complete al of the requirements.
+This was a difficult homework to do. Adding employees and having them actually show up on the database and in the tables took so long, and in the end, it helped me to understand what I was doing, but it took so much time, that I wasn't able to complete all of the requirements. When it came to the delete function, it actually does delete and it shows in the MYSQL Workbench, but it doesn't show it on table in the Terminal. With the update function, I could not get the information to update.
 
 ## Credits
 
@@ -12,9 +12,13 @@ Thank you to the other students in this Bootcamp course with me, who sit on the 
 
 ## Layout
 
-Here's what to expect!
+GitHub Repo Link:
 
-![EmployeeTracker](.png "Employee Tracker")
+https://github.com/jamjon94/Employee-Tracker
+
+Here's what it looks like!
+
+![EmployeeTracker](assets/employee-tracker-ss.png "Employee Tracker")
 
 ## License
 
