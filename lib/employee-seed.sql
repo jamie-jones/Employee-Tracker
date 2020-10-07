@@ -23,10 +23,11 @@ CREATE TABLE employee(
 	empID INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
-    manager VARCHAR(50),
+	manager VARCHAR(50),
     roleID int,
     PRIMARY KEY (empID),
-    FOREIGN KEY (roleID) REFERENCES role(roleID)
+--     CONSTRAINT FOREIGN KEY (managerID) REFERENCES employee(empID),
+    CONSTRAINT FOREIGN KEY (roleID) REFERENCES role(roleID)
 );
 
 INSERT INTO department(name)
@@ -36,27 +37,27 @@ VALUES ("Legal"),
 ("Finance");
 
 INSERT INTO role(title, salary, depID)
-VALUES ("Sales Lead", "100000", "2"),
-("Salesperson", "80000", "2"),
-("Lead Engineer", "150000", "3"),
-("Software Engineer", "120000", "3"),
-("Account Manager", "160000", "4"),
-("Accountant", "125000", "4"),
-("Legal Team Lead", "250000", "1"),
-("Lawyer", "190000", "1");
+VALUES ("Sales Lead", 100000, 2),
+("Salesperson", 80000, 2),
+("Lead Engineer", 150000, 3),
+("Software Engineer", 120000, 3),
+("Account Manager", 160000, 4),
+("Accountant", 125000, 4),
+("Legal Team Lead", 250000, 1),
+("Lawyer", 190000, 1);
 
 INSERT INTO employee(first_name, last_name, roleID, manager)
-VALUES ("Macie", "Gomez", "5", "Lexa Woods"),
-("Bryn", "Hughes", "1", "Santana Lopez"),
-("Matas", "Terry", "3", "Clarke Griffin"),
-("Caden", "Garrett", "6", "Lexa Woods"),
-("Marlene", "Edgars", "2", "Santana Lopez"),
-("Parvati", "Malak", "8", "Raelle Collar"),
-("Charlene", "Iria", "2", "Santana Lopez"),
-("Blaise", "Zabini", "4", "Clarke Griffin"),
-("Samuel", "Bowers", "6", "Lexa Woods"),
-("Blake", "Flemming", "2", "Santana Lopez"),
-("Libba", "Swyth", "7", "Raelle Collar");
+VALUES ("Lexa", "Woods", 5, null),
+("Anacostia", "Quartermaine", 1, null),
+("Clarke", "Griffin", 3, null),
+("Brittany", "Pearse", 6, "Lexa Woods"),
+("Abigail", "Bellweather", 2, "Santana Lopez"),
+("Tally", "Craven", 8, "Santana Lopez"),
+("Quinn", "Fabray", 2, "Lexa Woods"),
+("Blaise", "Zabini", 4, "Clarke Griffin"),
+("Raelle", "Collar", 6, "Anacostia Quartermaine"),
+("Doc", "Holliday", 2, "Santana Lopez"),
+("Santana", "Lopez", 7, null);
 
 SELECT * FROM department;
 
@@ -64,6 +65,23 @@ SELECT * FROM role;
 
 SELECT * FROM employee;
 
-SELECT employee.first_name, employee.last_name, role.title, department.name, role.salary, employee.manager FROM ((employee
-INNER JOIN role ON employee.roleID = roleID)
-INNER JOIN department ON role.depID = depID);
+-- SELECT managerID FROM employee GROUP BY manager;
+
+SELECT employee.empID, employee.first_name, employee.last_name, role.title, department.name, role.salary, employee.manager
+FROM employee
+INNER JOIN role ON employee.roleID = role.roleID
+INNER JOIN department ON role.depID = department.depID;
+
+SELECT department.name, employee.first_name, employee.last_name FROM employee
+INNER JOIN role ON employee.roleID = role.roleID
+INNER JOIN department ON role.depID = department.depID;
+
+SELECT employee.manager, employee.first_name, employee.last_name FROM employee
+WHERE employee.manager IS NOT NULL;
+
+DELETE FROM employee WHERE empID = 10;
+
+UPDATE employee SET roleID = 4 WHERE empID = 2;
+
+INSERT INTO employee (first_name, last_name, roleID, manager)
+VALUES ("Waverly", "Earp", 4, "Lexa Woods");
